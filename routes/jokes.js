@@ -81,4 +81,36 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/summary', async (req, res) => {
+  try {
+    const allJokes = await Jokes.find()
+    const jokes = []
+    let words = []
+
+    for (let i = 0; i < allJokes.length; i++) {
+      if (jokes.length < TOP_TEN) {
+        jokes.push(allJokes[Math.floor(Math.random() * allJokes.length)].joke)
+      }
+    }
+
+    for (const item of jokes) {
+      words.push(...item.split(' '))
+    }
+
+    words = words.sort()
+    const countWords = words.reduce((r, e) => {
+      r[e] = (r[e] || 0) + 1;
+      return r;
+    }, {});
+
+    res.json({
+      jokes,
+      words: countWords,
+    })
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Internal server error')
+  }
+})
+
 module.exports = router
