@@ -35,4 +35,14 @@ router.get('/random/internal', async (req, res) => {
   }
 })
 
+router.delete('/', async (req, res) => {
+  try {
+    await Jokes.deleteMany()
+    res.json({ message: 'All jokes has been deleted' })
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Internal server error')
+  }
+})
+
 module.exports = router
