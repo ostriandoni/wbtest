@@ -4,11 +4,16 @@
   "description": "WB Test",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index",
     "start": "node index.js"
   },
   "author": "Donny Ostrianto",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
