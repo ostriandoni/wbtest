@@ -4,6 +4,8 @@ const router = express.Router()
 const BASE_URL = 'http://api.icndb.com/jokes'
 const Jokes = require('../models/Jokes')
 
+const TOP_TEN = 10
+
 router.get('/random', async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/random`)
@@ -19,7 +21,7 @@ router.get('/random', async (req, res) => {
   }
 })
 
-router.get('/random/internal', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const jokes = await Jokes.find()
     const result = []
@@ -46,7 +48,6 @@ router.delete('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const TOP_TEN = 10
   const jokes = []
 
   try {
